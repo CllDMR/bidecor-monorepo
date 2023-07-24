@@ -11,149 +11,11 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Post {
-    id      String @id @default(cuid())
-    title   String
-    content String
-}
-
-model Shop {
-    id            String       @id @default(cuid())
-    createdAt     DateTime     @default(now())
-    updatedAt     DateTime     @updatedAt
-    name          String
-    email         String
-    Users         User[]
-    Products      Product[]
-    ShopAddress   ShopAddress?
-    shopAddressId String?
-
-    @@index([shopAddressId])
-}
-
 model Product {
-    id                String            @id @default(cuid())
-    createdAt         DateTime          @default(now())
-    updatedAt         DateTime          @updatedAt
-    name              String
-    price             Float
-    sku               String
-    imageURL          String
-    thumbURL          String
-    stock             Float
-    ProductCategory   ProductCategory?  @relation(fields: [productCategoryId], references: [id])
-    productCategoryId String?
-    ProductTag        ProductTag?       @relation(fields: [productTagId], references: [id])
-    productTagId      String?
-    Shop              Shop?             @relation(fields: [shopId], references: [id])
-    shopId            String?
-    CheckoutProduct   CheckoutProduct[]
-
-    @@index([shopId])
-    @@index([productCategoryId])
-    @@index([productTagId])
-}
-
-model ProductCategory {
-    id        String    @id @default(cuid())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
     name      String
-    Products  Product[]
-
-    @@index([name])
-}
-
-model ProductTag {
-    id        String    @id @default(cuid())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    name      String
-    Products  Product[]
-
-    @@index([name])
-}
-
-model Checkout {
-    id                String            @id @default(cuid())
-    createdAt         DateTime          @default(now())
-    updatedAt         DateTime          @updatedAt
-    total             Float
-    discount          Float
-    grandTotal        Float
-    User              User              @relation(fields: [userId], references: [id])
-    userId            String            @unique
-    CheckoutAddress   CheckoutAddress?
-    checkoutAddressId String            @unique
-    CheckoutProducts  CheckoutProduct[]
-
-    @@index([userId])
-    @@index([checkoutAddressId])
-}
-
-model CheckoutProduct {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    price      Float
-    quantity   Float
-    Product    Product  @relation(fields: [productId], references: [id])
-    productId  String
-    Checkout   Checkout @relation(fields: [checkoutId], references: [id])
-    checkoutId String
-
-    @@index([productId])
-    @@index([checkoutId])
-}
-
-model CheckoutAddress {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    line1      String
-    line2      String
-    postalCode String
-    country    String
-    city       String
-    district   String
-    Checkout   Checkout @relation(fields: [checkoutId], references: [id])
-    checkoutId String   @unique
-
-    @@index([checkoutId])
-}
-
-model UserAddress {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    line1      String
-    line2      String
-    postalCode String
-    country    String
-    city       String
-    district   String
-    phone      String?
-    User       User     @relation(fields: [userId], references: [id])
-    userId     String   @unique
-
-    @@index([userId])
-}
-
-model ShopAddress {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    line1      String
-    line2      String
-    postalCode String
-    country    String
-    city       String
-    district   String
-    phone      String?
-    Shop       Shop     @relation(fields: [shopId], references: [id])
-    shopId     String   @unique
-
-    @@index([shopId])
 }
 
 // NextAuth.js Models
@@ -190,19 +52,13 @@ model Session {
 }
 
 model User {
-    id            String       @id @default(cuid())
+    id            String    @id @default(cuid())
     name          String?
-    email         String?      @unique
+    email         String?   @unique
     emailVerified DateTime?
     image         String?
     Accounts      Account[]
     Sessions      Session[]
-    Shops         Shop[]
-    Checkouts     Checkout[]
-    UserAddress   UserAddress?
-    userAddressId String?
-
-    @@index([userAddressId])
 }
 
 model VerificationToken {
