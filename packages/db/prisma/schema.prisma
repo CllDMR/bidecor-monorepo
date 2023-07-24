@@ -11,11 +11,192 @@ datasource db {
     relationMode = "prisma"
 }
 
+model CustomerCheckout {
+    id                       String                    @id @default(cuid())
+    createdAt                DateTime                  @default(now())
+    updatedAt                DateTime                  @updatedAt
+    customerId               String
+    CustomerCheckoutProducts CustomerCheckoutProduct[]
+    grandPrice               Float
+    grandDiscount            Float
+    grandTotalPrice          Float
+    CustomerPayment          CustomerPayment[]
+}
+
+model CustomerCheckoutProduct {
+    id                   String            @id @default(cuid())
+    createdAt            DateTime          @default(now())
+    updatedAt            DateTime          @updatedAt
+    estimatedArrivalDate DateTime
+    status               String
+    price                Float
+    discount             Float
+    totalPrice           Float
+    CustomerCheckout     CustomerCheckout? @relation(fields: [customerCheckoutId], references: [id])
+    customerCheckoutId   String?
+    stockId              String? // TODO
+    SupplierCheckout     SupplierCheckout? @relation(fields: [supplierCheckoutId], references: [id])
+    supplierCheckoutId   String?
+
+    @@index([customerCheckoutId])
+    @@index([supplierCheckoutId])
+}
+
+model SupplierCheckout {
+    id                       String                    @id @default(cuid())
+    createdAt                DateTime                  @default(now())
+    updatedAt                DateTime                  @updatedAt
+    SupplierCheckoutProducts SupplierCheckoutProduct[]
+    Supplier                 Supplier                  @relation(fields: [supplierId], references: [id])
+    supplierId               String
+
+    grandPrice              Float
+    grandDiscount           Float
+    grandTotalPrice         Float
+    CustomerCheckoutProduct CustomerCheckoutProduct[]
+    SupplierPayment         SupplierPayment[]
+
+    @@index([supplierId])
+}
+
+model SupplierCheckoutProduct {
+    id                   String                      @id @default(cuid())
+    createdAt            DateTime                    @default(now())
+    updatedAt            DateTime                    @updatedAt
+    estimatedArrivalDate DateTime
+    status               CheckoutProductSupplyStatus
+    price                Float
+    discount             Float
+    totalPrice           Float
+    SupplierCheckout     SupplierCheckout?           @relation(fields: [supplierCheckoutId], references: [id])
+    supplierCheckoutId   String?
+
+    @@index([supplierCheckoutId])
+}
+
+enum CheckoutProductSupplyStatus {
+    Pending
+}
+
+model CustomerPayment {
+    id                   String                @id @default(cuid())
+    createdAt            DateTime              @default(now())
+    updatedAt            DateTime              @updatedAt
+    amount               String
+    commission           String
+    customerTransactions CustomerTransaction[]
+    Customer             Customer              @relation(fields: [customerId], references: [id])
+    customerId           String
+    CustomerCheckout     CustomerCheckout?     @relation(fields: [customerCheckoutId], references: [id])
+    customerCheckoutId   String
+
+    @@index([customerCheckoutId])
+    @@index([customerId])
+}
+
+model CustomerTransaction {
+    id                String                  @id @default(cuid())
+    createdAt         DateTime                @default(now())
+    updatedAt         DateTime                @updatedAt
+    amount            String
+    type              CustomerTransactionType
+    bank              Float
+    CustomerPayment   CustomerPayment?        @relation(fields: [customerPaymentId], references: [id])
+    customerPaymentId String?
+
+    @@index([customerPaymentId])
+}
+
+enum CustomerTransactionType {
+    Cash
+    DownPayment
+    Bank
+    Credit
+}
+
+model SupplierPayment {
+    id                   String                @id @default(cuid())
+    createdAt            DateTime              @default(now())
+    updatedAt            DateTime              @updatedAt
+    amount               String
+    supplierTransactions SupplierTransaction[]
+    Supplier             Supplier              @relation(fields: [supplierId], references: [id])
+    supplierId           String
+    SupplierCheckout     SupplierCheckout?     @relation(fields: [supplierCheckoutId], references: [id])
+    supplierCheckoutId   String
+
+    @@index([supplierCheckoutId])
+    @@index([supplierId])
+}
+
+model SupplierTransaction {
+    id                String                  @id @default(cuid())
+    createdAt         DateTime                @default(now())
+    updatedAt         DateTime                @updatedAt
+    status            String
+    paymentAt         DateTime
+    willBePaymentAt   DateTime
+    amount            String
+    type              SupplierTransactionType
+    SupplierPayment   SupplierPayment?        @relation(fields: [supplierPaymentId], references: [id])
+    supplierPaymentId String?
+
+    @@index([supplierPaymentId])
+}
+
+enum SupplierTransactionType {
+    Cash
+    Bank
+    Credit
+}
+
 model Product {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     name      String
+}
+
+model ProductGroup {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+}
+
+model Customer {
+    id              String            @id @default(cuid())
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    name            String
+    CustomerPayment CustomerPayment[]
+}
+
+model Address {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+}
+
+enum CargoStatus {
+    Pending
+}
+
+enum PaymentType {
+    Pending
+}
+
+enum PaymentStatus {
+    Pending
+}
+
+model Supplier {
+    id               String             @id @default(cuid())
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    SupplierCheckout SupplierCheckout[]
+    SupplierPayment  SupplierPayment[]
 }
 
 // NextAuth.js Models
