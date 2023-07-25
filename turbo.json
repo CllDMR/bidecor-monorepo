@@ -20,12 +20,12 @@
     },
     "lint": {},
     "lint:fix": {},
-    "clean": {
-      "cache": false
-    },
-    "//#clean": {
-      "cache": false
-    },
+    "mc": {},
+    "mf": {},
+    "//#mc": { "cache": false },
+    "//#mf": { "cache": false },
+    "clean": { "cache": false },
+    "//#clean": { "cache": false },
     "type-check": {
       "dependsOn": ["^db:generate"],
       "cache": false
