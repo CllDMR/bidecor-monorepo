@@ -12,12 +12,7 @@ export const productRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
-        imageURL: z.string().nonempty(),
         name: z.string().nonempty(),
-        price: z.number().min(1),
-        sku: z.string().nonempty(),
-        stock: z.number().min(1),
-        thumbURL: z.string().nonempty(),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -29,12 +24,7 @@ export const productRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string().nonempty(),
-        imageURL: z.string().nonempty().optional(),
         name: z.string().nonempty().optional(),
-        price: z.number().min(1).optional(),
-        sku: z.string().nonempty().optional(),
-        stock: z.number().min(1).optional(),
-        thumbURL: z.string().nonempty().optional(),
       }),
     )
     .mutation(({ ctx, input: { id, ...restInput } }) => {
