@@ -19,8 +19,11 @@ model CustomerCheckout {
     grandDiscount            Float
     grandTotalPrice          Float
     customerId               String
+    Customer                 Customer                  @relation(fields: [customerId], references: [id])
     CustomerPayment          CustomerPayment[]
     CustomerCheckoutProducts CustomerCheckoutProduct[]
+
+    @@index([customerId])
 }
 
 model CustomerCheckoutProduct {
@@ -85,7 +88,7 @@ model CustomerPayment {
     commission           String
     customerId           String
     Customer             Customer              @relation(fields: [customerId], references: [id])
-    customerCheckoutId   String
+    customerCheckoutId   String?
     CustomerCheckout     CustomerCheckout?     @relation(fields: [customerCheckoutId], references: [id])
     customerTransactions CustomerTransaction[]
 
@@ -120,7 +123,7 @@ model SupplierPayment {
     amount               String
     supplierId           String
     Supplier             Supplier              @relation(fields: [supplierId], references: [id])
-    supplierCheckoutId   String
+    supplierCheckoutId   String?
     SupplierCheckout     SupplierCheckout?     @relation(fields: [supplierCheckoutId], references: [id])
     supplierTransactions SupplierTransaction[]
 
@@ -164,11 +167,12 @@ model ProductGroup {
 }
 
 model Customer {
-    id              String            @id @default(cuid())
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
-    name            String
-    CustomerPayment CustomerPayment[]
+    id               String             @id @default(cuid())
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    name             String
+    CustomerPayment  CustomerPayment[]
+    CustomerCheckout CustomerCheckout[]
 }
 
 model Address {
