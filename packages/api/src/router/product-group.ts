@@ -2,12 +2,12 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
-export const productRouter = createTRPCRouter({
+export const productGroupRouter = createTRPCRouter({
   all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.product.findMany({ orderBy: { id: "desc" } });
+    return ctx.prisma.productGroup.findMany({ orderBy: { id: "desc" } });
   }),
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-    return ctx.prisma.product.findFirst({ where: { id: input } });
+    return ctx.prisma.productGroup.findFirst({ where: { id: input } });
   }),
   create: publicProcedure
     .input(
@@ -16,7 +16,7 @@ export const productRouter = createTRPCRouter({
       }),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.prisma.product.create({
+      return ctx.prisma.productGroup.create({
         data: input,
       });
     }),
@@ -28,7 +28,7 @@ export const productRouter = createTRPCRouter({
       }),
     )
     .mutation(({ ctx, input: { id, ...restInput } }) => {
-      return ctx.prisma.product.update({
+      return ctx.prisma.productGroup.update({
         where: {
           id: id,
         },
@@ -36,6 +36,6 @@ export const productRouter = createTRPCRouter({
       });
     }),
   delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.prisma.product.delete({ where: { id: input } });
+    return ctx.prisma.productGroup.delete({ where: { id: input } });
   }),
 });

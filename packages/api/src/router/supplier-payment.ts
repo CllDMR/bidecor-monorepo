@@ -2,21 +2,22 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
-export const productRouter = createTRPCRouter({
+export const supplierPaymentRouter = createTRPCRouter({
   all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.product.findMany({ orderBy: { id: "desc" } });
+    return ctx.prisma.supplierPayment.findMany({ orderBy: { id: "desc" } });
   }),
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
-    return ctx.prisma.product.findFirst({ where: { id: input } });
+    return ctx.prisma.supplierPayment.findFirst({ where: { id: input } });
   }),
   create: publicProcedure
     .input(
       z.object({
-        name: z.string().nonempty(),
+        supplierId: z.string().nonempty(),
+        amount: z.string().nonempty(),
       }),
     )
     .mutation(({ ctx, input }) => {
-      return ctx.prisma.product.create({
+      return ctx.prisma.supplierPayment.create({
         data: input,
       });
     }),
@@ -24,11 +25,12 @@ export const productRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string().nonempty(),
-        name: z.string().nonempty().optional(),
+        supplierId: z.string().nonempty().optional(),
+        amount: z.string().nonempty().optional(),
       }),
     )
     .mutation(({ ctx, input: { id, ...restInput } }) => {
-      return ctx.prisma.product.update({
+      return ctx.prisma.supplierPayment.update({
         where: {
           id: id,
         },
@@ -36,6 +38,6 @@ export const productRouter = createTRPCRouter({
       });
     }),
   delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
-    return ctx.prisma.product.delete({ where: { id: input } });
+    return ctx.prisma.supplierPayment.delete({ where: { id: input } });
   }),
 });

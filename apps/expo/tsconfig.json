@@ -5,6 +5,7 @@
     "paths": {
       "~/*": ["./src/*"]
     },
+    "lib": ["es2017"],
     "jsx": "react-native",
     "types": ["nativewind/types", "webpack-env"]
   },

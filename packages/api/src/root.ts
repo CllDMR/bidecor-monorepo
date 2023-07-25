@@ -1,28 +1,26 @@
+import { addressRouter } from "./router/address";
 import { authRouter } from "./router/auth";
-import { checkoutRouter } from "./router/checkout";
-import { checkoutAddressRouter } from "./router/checkoutAddress";
-import { checkoutProductRouter } from "./router/checkoutProduct";
-import { postRouter } from "./router/post";
+import { customerRouter } from "./router/customer";
+import { customerCheckoutRouter } from "./router/customer-checkout";
+import { customerPaymentRouter } from "./router/customer-payment";
 import { productRouter } from "./router/product";
-import { productCategoryRouter } from "./router/productCategory";
-import { productTagRouter } from "./router/productTag";
-import { shopRouter } from "./router/shop";
-import { shopAddressRouter } from "./router/shopAddress";
-import { userAddressRouter } from "./router/userAddress";
+import { productGroupRouter } from "./router/product-group";
+import { supplierRouter } from "./router/supplier";
+import { supplierCheckoutRouter } from "./router/supplier-checkout";
+import { supplierPaymentRouter } from "./router/supplier-payment";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
+  address: addressRouter,
   auth: authRouter,
-  checkout: checkoutRouter,
-  checkoutProduct: checkoutProductRouter,
-  checkoutAddress: checkoutAddressRouter,
-  post: postRouter,
+  customerCheckout: customerCheckoutRouter,
+  customerPayment: customerPaymentRouter,
+  customer: customerRouter,
+  productGroup: productGroupRouter,
   product: productRouter,
-  productCategory: productCategoryRouter,
-  productTag: productTagRouter,
-  shop: shopRouter,
-  shopAddress: shopAddressRouter,
-  userAddress: userAddressRouter,
+  supplierCheckout: supplierCheckoutRouter,
+  supplierPayment: supplierPaymentRouter,
+  supplier: supplierRouter,
 });
 
 // export type definition of API
