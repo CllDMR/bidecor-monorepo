@@ -15,12 +15,12 @@ model CustomerCheckout {
     id                       String                    @id @default(cuid())
     createdAt                DateTime                  @default(now())
     updatedAt                DateTime                  @updatedAt
-    customerId               String
-    CustomerCheckoutProducts CustomerCheckoutProduct[]
     grandPrice               Float
     grandDiscount            Float
     grandTotalPrice          Float
+    customerId               String
     CustomerPayment          CustomerPayment[]
+    CustomerCheckoutProducts CustomerCheckoutProduct[]
 }
 
 model CustomerCheckoutProduct {
@@ -32,11 +32,11 @@ model CustomerCheckoutProduct {
     price                Float
     discount             Float
     totalPrice           Float
-    CustomerCheckout     CustomerCheckout? @relation(fields: [customerCheckoutId], references: [id])
-    customerCheckoutId   String?
     stockId              String? // TODO
-    SupplierCheckout     SupplierCheckout? @relation(fields: [supplierCheckoutId], references: [id])
+    customerCheckoutId   String?
+    CustomerCheckout     CustomerCheckout? @relation(fields: [customerCheckoutId], references: [id])
     supplierCheckoutId   String?
+    SupplierCheckout     SupplierCheckout? @relation(fields: [supplierCheckoutId], references: [id])
 
     @@index([customerCheckoutId])
     @@index([supplierCheckoutId])
@@ -46,15 +46,14 @@ model SupplierCheckout {
     id                       String                    @id @default(cuid())
     createdAt                DateTime                  @default(now())
     updatedAt                DateTime                  @updatedAt
-    SupplierCheckoutProducts SupplierCheckoutProduct[]
-    Supplier                 Supplier                  @relation(fields: [supplierId], references: [id])
+    grandPrice               Float
+    grandDiscount            Float
+    grandTotalPrice          Float
     supplierId               String
-
-    grandPrice              Float
-    grandDiscount           Float
-    grandTotalPrice         Float
-    CustomerCheckoutProduct CustomerCheckoutProduct[]
-    SupplierPayment         SupplierPayment[]
+    Supplier                 Supplier                  @relation(fields: [supplierId], references: [id])
+    CustomerCheckoutProduct  CustomerCheckoutProduct[]
+    SupplierPayment          SupplierPayment[]
+    SupplierCheckoutProducts SupplierCheckoutProduct[]
 
     @@index([supplierId])
 }
@@ -68,8 +67,8 @@ model SupplierCheckoutProduct {
     price                Float
     discount             Float
     totalPrice           Float
-    SupplierCheckout     SupplierCheckout?           @relation(fields: [supplierCheckoutId], references: [id])
     supplierCheckoutId   String?
+    SupplierCheckout     SupplierCheckout?           @relation(fields: [supplierCheckoutId], references: [id])
 
     @@index([supplierCheckoutId])
 }
@@ -84,11 +83,11 @@ model CustomerPayment {
     updatedAt            DateTime              @updatedAt
     amount               String
     commission           String
-    customerTransactions CustomerTransaction[]
-    Customer             Customer              @relation(fields: [customerId], references: [id])
     customerId           String
-    CustomerCheckout     CustomerCheckout?     @relation(fields: [customerCheckoutId], references: [id])
+    Customer             Customer              @relation(fields: [customerId], references: [id])
     customerCheckoutId   String
+    CustomerCheckout     CustomerCheckout?     @relation(fields: [customerCheckoutId], references: [id])
+    customerTransactions CustomerTransaction[]
 
     @@index([customerCheckoutId])
     @@index([customerId])
@@ -101,8 +100,8 @@ model CustomerTransaction {
     amount            String
     type              CustomerTransactionType
     bank              Float
-    CustomerPayment   CustomerPayment?        @relation(fields: [customerPaymentId], references: [id])
     customerPaymentId String?
+    CustomerPayment   CustomerPayment?        @relation(fields: [customerPaymentId], references: [id])
 
     @@index([customerPaymentId])
 }
@@ -119,11 +118,11 @@ model SupplierPayment {
     createdAt            DateTime              @default(now())
     updatedAt            DateTime              @updatedAt
     amount               String
-    supplierTransactions SupplierTransaction[]
-    Supplier             Supplier              @relation(fields: [supplierId], references: [id])
     supplierId           String
-    SupplierCheckout     SupplierCheckout?     @relation(fields: [supplierCheckoutId], references: [id])
+    Supplier             Supplier              @relation(fields: [supplierId], references: [id])
     supplierCheckoutId   String
+    SupplierCheckout     SupplierCheckout?     @relation(fields: [supplierCheckoutId], references: [id])
+    supplierTransactions SupplierTransaction[]
 
     @@index([supplierCheckoutId])
     @@index([supplierId])
@@ -138,8 +137,8 @@ model SupplierTransaction {
     willBePaymentAt   DateTime
     amount            String
     type              SupplierTransactionType
-    SupplierPayment   SupplierPayment?        @relation(fields: [supplierPaymentId], references: [id])
     supplierPaymentId String?
+    SupplierPayment   SupplierPayment?        @relation(fields: [supplierPaymentId], references: [id])
 
     @@index([supplierPaymentId])
 }
