@@ -6,11 +6,9 @@ export const productRouter = createTRPCRouter({
   all: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.product.findMany({ orderBy: { id: "desc" } });
   }),
-  byId: publicProcedure
-    .input(z.object({ id: z.string() }))
-    .query(({ ctx, input }) => {
-      return ctx.prisma.product.findFirst({ where: { id: input.id } });
-    }),
+  byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    return ctx.prisma.product.findFirst({ where: { id: input } });
+  }),
   create: publicProcedure
     .input(
       z.object({
@@ -39,12 +37,12 @@ export const productRouter = createTRPCRouter({
         thumbURL: z.string().nonempty().optional(),
       }),
     )
-    .mutation(({ ctx, input }) => {
+    .mutation(({ ctx, input: { id, ...restInput } }) => {
       return ctx.prisma.product.update({
         where: {
-          id: input.id,
+          id: id,
         },
-        data: input,
+        data: restInput,
       });
     }),
   delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
