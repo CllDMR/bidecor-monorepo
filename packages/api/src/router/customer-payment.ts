@@ -27,9 +27,8 @@ export const customerPaymentRouter = createTRPCRouter({
       z.object({
         id: z.string().nonempty(),
         customerId: z.string().nonempty().optional(),
-        grandDiscount: z.number().positive().optional(),
-        grandPrice: z.number().positive().optional(),
-        grandTotalPrice: z.number().positive().optional(),
+        amount: z.string().nonempty().optional(),
+        commission: z.string().nonempty().optional(),
       }),
     )
     .mutation(({ ctx, input: { id, ...restInput } }) => {
