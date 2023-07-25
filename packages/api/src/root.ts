@@ -6,16 +6,18 @@ import { customerPaymentRouter } from "./router/customer-payment";
 import { productRouter } from "./router/product";
 import { supplierRouter } from "./router/supplier";
 import { supplierCheckoutRouter } from "./router/supplier-checkout";
+import { supplierPaymentRouter } from "./router/supplier-payment";
 import { createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
+  address: addressRouter,
   auth: authRouter,
-  product: productRouter,
   customerCheckout: customerCheckoutRouter,
   customerPayment: customerPaymentRouter,
-  supplierCheckout: supplierCheckoutRouter,
   customer: customerRouter,
-  address: addressRouter,
+  product: productRouter,
+  supplierCheckout: supplierCheckoutRouter,
+  supplierPayment: supplierPaymentRouter,
   supplier: supplierRouter,
 });
 
