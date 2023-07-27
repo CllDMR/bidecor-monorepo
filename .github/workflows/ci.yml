@@ -11,19 +11,17 @@ on:
 # @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_TEAM: $TURBO_TEAM
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
   NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
   EMAIL_SERVER: ${{ secrets.EMAIL_SERVER }}
-  EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+  EMAIL_FROM: $EMAIL_FROM
   DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
   DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
-  BROWSER: ${{ secrets.BROWSER }}
+  BROWSER: $BROWSER
 
 jobs:
   build-lint:
-    env:
-      DATABASE_URL: file:./db.sqlite
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +35,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
+      - name: Get env output
+        run: env
 
       - name: Get pnpm store directory
         id: pnpm-cache
