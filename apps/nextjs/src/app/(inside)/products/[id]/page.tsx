@@ -1,14 +1,10 @@
-import { useRouter } from "next/router";
+"use client";
+
+import type { NextPage } from "next";
 
 import { api } from "~/utils/api";
 
-const Page = () => {
-  const router = useRouter();
-  const id =
-    router.query.id && Array.isArray(router.query.id)
-      ? router.query.id[0] ?? ""
-      : router.query.id ?? "";
-
+const Page: NextPage<{ params: { id: string } }> = ({ params: { id } }) => {
   const [product] = api.product.byId.useSuspenseQuery(id);
 
   if (!product) return <div className="">Product not found with {id} !</div>;

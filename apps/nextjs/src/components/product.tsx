@@ -150,7 +150,10 @@ function ProductCard(props: {
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title">{props.product.name}</h2>
+        <Link className="card-title" href={`products/${props.product.id}`}>
+          <h2>{props.product.name}</h2>
+        </Link>
+
         <p className="">
           Created At: {new Date(props.product.createdAt).toISOString()}
         </p>
