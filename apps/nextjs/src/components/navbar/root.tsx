@@ -43,7 +43,7 @@ export const NavbarRoot: FC = async () => {
 
         {session && (
           <div className="flex items-center justify-end gap-4">
-            <span>Logged in as {session.user.name}</span>
+            <span>{session.user.name ?? session.user.email ?? ""}</span>
             <SignOutButton />
           </div>
         )}
