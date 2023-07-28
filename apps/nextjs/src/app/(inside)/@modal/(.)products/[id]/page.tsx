@@ -1,5 +1,7 @@
-const Modal = () => {
-  return <div>Modal</div>;
+import { Modal } from "~/components/modal";
+
+const ModalPage = () => {
+  return <Modal>ModalPage</Modal>;
 };
 
-export default Modal;
+export default ModalPage;
