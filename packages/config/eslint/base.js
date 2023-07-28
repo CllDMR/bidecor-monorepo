@@ -29,6 +29,7 @@ const config = {
       2,
       { checksVoidReturn: { attributes: false } },
     ],
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
   },
   ignorePatterns: [
