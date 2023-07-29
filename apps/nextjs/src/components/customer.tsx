@@ -57,8 +57,7 @@ export const EditCustomerForm: FC<{ id: string }> = ({ id }) => {
         register={register}
         required
         errorText={
-          errors.name?.message ??
-          error?.data?.zodError?.fieldErrors.imageURL?.[0]
+          errors.name?.message ?? error?.data?.zodError?.fieldErrors.name?.[0]
         }
       />
 
@@ -107,8 +106,7 @@ export function CreateCustomerForm() {
         register={register}
         required
         errorText={
-          errors.name?.message ??
-          error?.data?.zodError?.fieldErrors.imageURL?.[0]
+          errors.name?.message ?? error?.data?.zodError?.fieldErrors.name?.[0]
         }
       />
 

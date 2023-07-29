@@ -57,8 +57,7 @@ export const EditProductForm: FC<{ id: string }> = ({ id }) => {
         register={register}
         required
         errorText={
-          errors.name?.message ??
-          error?.data?.zodError?.fieldErrors.imageURL?.[0]
+          errors.name?.message ?? error?.data?.zodError?.fieldErrors.name?.[0]
         }
       />
 
@@ -107,8 +106,7 @@ export function CreateProductForm() {
         register={register}
         required
         errorText={
-          errors.name?.message ??
-          error?.data?.zodError?.fieldErrors.imageURL?.[0]
+          errors.name?.message ?? error?.data?.zodError?.fieldErrors.name?.[0]
         }
       />
 
@@ -148,7 +146,7 @@ function ProductCard(props: {
   const deleteProduct = api.product.delete.useMutation();
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card-compact card bg-base-100 shadow-xl">
       <div className="card-body">
         <Link className="card-title" href={`products/${props.product.id}`}>
           <h2>{props.product.name}</h2>
