@@ -1,4 +1,3 @@
-import Discord from "@auth/core/providers/discord";
 import EmailProvider from "@auth/core/providers/email";
 import type { DefaultSession, Theme } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -12,7 +11,7 @@ import { env } from "./env.mjs";
 export type { Session } from "next-auth";
 
 // Update this whenever adding new providers so that the client can
-export const providers = ["discord", "email"] as const;
+export const providers = ["email"] as const;
 export type OAuthProviders = (typeof providers)[number];
 
 declare module "next-auth" {
@@ -55,10 +54,6 @@ export const {
 
         console.log("Preview URL: " + getTestMessageUrl(result));
       },
-    }),
-    Discord({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
   ],
   callbacks: {

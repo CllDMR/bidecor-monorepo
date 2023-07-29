@@ -3,8 +3,6 @@ import Link from "next/link";
 
 import { CSRF_experimental } from "@acme/auth";
 
-import { SignInWithDiscordButton } from "~/components/auth";
-
 const HomePage: FC = () => {
   return (
     <div
@@ -56,14 +54,6 @@ const HomePage: FC = () => {
               </button>
               <CSRF_experimental />
             </form>
-            <div className="mt-3">
-              <div>
-                <span>Or</span>
-              </div>
-              <div className="mt-3">
-                <SignInWithDiscordButton />
-              </div>
-            </div>
           </div>
         </div>
       </div>
