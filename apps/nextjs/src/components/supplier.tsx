@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IFormValues {}
 
 export const EditSupplierForm: FC<{
@@ -17,25 +18,18 @@ export const EditSupplierForm: FC<{
 
   const context = api.useContext();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<IFormValues>({
+  const { handleSubmit, reset } = useForm<IFormValues>({
     defaultValues: { ...supplier },
   });
 
-  const {
-    mutate: updateSupplier,
-    error,
-    isLoading,
-  } = api.supplier.update.useMutation({
-    async onSuccess(data) {
-      reset(data);
-      await context.supplier.all.invalidate();
+  const { mutate: updateSupplier, isLoading } = api.supplier.update.useMutation(
+    {
+      async onSuccess(data) {
+        reset(data);
+        await context.supplier.all.invalidate();
+      },
     },
-  });
+  );
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
     updateSupplier({
@@ -51,16 +45,6 @@ export const EditSupplierForm: FC<{
       className="form-control w-full max-w-2xl p-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* <InputField
-        label="amount"
-        register={register}
-        required
-        errorText={
-          errors.amount?.message ??
-          error?.data?.zodError?.fieldErrors.amount?.[0]
-        }
-      /> */}
-
       <button
         type="submit"
         className="btn btn-primary mt-4 disabled:btn-disabled"
@@ -76,23 +60,16 @@ export const CreateSupplierForm: FC<{
   supplierId: string;
 }> = ({ supplierId }) => {
   const context = api.useContext();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<IFormValues>();
+  const { handleSubmit, reset } = useForm<IFormValues>();
 
-  const {
-    mutate: createSupplier,
-    error,
-    isLoading,
-  } = api.supplier.create.useMutation({
-    async onSuccess(data) {
-      reset(data);
-      await context.supplier.all.invalidate();
+  const { mutate: createSupplier, isLoading } = api.supplier.create.useMutation(
+    {
+      async onSuccess(data) {
+        reset(data);
+        await context.supplier.all.invalidate();
+      },
     },
-  });
+  );
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
     createSupplier({ ...data, supplierId });
@@ -103,16 +80,6 @@ export const CreateSupplierForm: FC<{
       className="form-control w-full max-w-2xl p-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* <InputField
-        label="amount"
-        register={register}
-        required
-        errorText={
-          errors.amount?.message ??
-          error?.data?.zodError?.fieldErrors.amount?.[0]
-        }
-      /> */}
-
       <button
         type="submit"
         className="btn btn-primary mt-4 disabled:btn-disabled"
@@ -149,7 +116,7 @@ function SupplierCard(props: {
   const deleteSupplier = api.supplier.delete.useMutation();
 
   return (
-    <div className="card-compact card bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
         <Link className="card-title" href={`suppliers/${props.supplier.id}`}>
           <h2>{props.supplier.id}</h2>
