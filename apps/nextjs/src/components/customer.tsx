@@ -13,8 +13,8 @@ interface IFormValues {
   name: string;
 }
 
-export const EditProductForm: FC<{ id: string }> = ({ id }) => {
-  const [product] = api.product.byId.useSuspenseQuery(id);
+export const EditCustomerForm: FC<{ id: string }> = ({ id }) => {
+  const [customer] = api.customer.byId.useSuspenseQuery(id);
 
   const context = api.useContext();
 
@@ -24,28 +24,28 @@ export const EditProductForm: FC<{ id: string }> = ({ id }) => {
     reset,
     formState: { errors },
   } = useForm<IFormValues>({
-    defaultValues: { ...product },
+    defaultValues: { ...customer },
   });
 
   const {
-    mutate: updateProduct,
+    mutate: updateCustomer,
     error,
     isLoading,
-  } = api.product.update.useMutation({
+  } = api.customer.update.useMutation({
     async onSuccess(data) {
       reset(data);
-      await context.product.all.invalidate();
+      await context.customer.all.invalidate();
     },
   });
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    updateProduct({
+    updateCustomer({
       ...data,
       id,
     });
   };
 
-  if (!product) return <div className="">Product not found with {id} !</div>;
+  if (!customer) return <div className="">Customer not found with {id} !</div>;
 
   return (
     <form
@@ -72,7 +72,7 @@ export const EditProductForm: FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export function CreateProductForm() {
+export function CreateCustomerForm() {
   const context = api.useContext();
   const {
     register,
@@ -82,18 +82,18 @@ export function CreateProductForm() {
   } = useForm<IFormValues>();
 
   const {
-    mutate: createProduct,
+    mutate: createCustomer,
     error,
     isLoading,
-  } = api.product.create.useMutation({
+  } = api.customer.create.useMutation({
     async onSuccess(data) {
       reset(data);
-      await context.product.all.invalidate();
+      await context.customer.all.invalidate();
     },
   });
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    createProduct(data);
+    createCustomer(data);
   };
 
   return (
@@ -121,17 +121,17 @@ export function CreateProductForm() {
   );
 }
 
-export function ProductList() {
-  const [products] = api.product.all.useSuspenseQuery();
+export function CustomerList() {
+  const [customers] = api.customer.all.useSuspenseQuery();
 
   return (
     <>
-      {products.length === 0 ? (
-        <span>There are no products!</span>
+      {customers.length === 0 ? (
+        <span>There are no customers!</span>
       ) : (
         <div className="grid w-full grid-cols-4 gap-3 px-4">
-          {products.map((p) => {
-            return <ProductCard key={p.id} product={p} />;
+          {customers.map((p) => {
+            return <CustomerCard key={p.id} customer={p} />;
           })}
         </div>
       )}
@@ -139,34 +139,34 @@ export function ProductList() {
   );
 }
 
-function ProductCard(props: {
-  product: RouterOutputs["product"]["all"][number];
+function CustomerCard(props: {
+  customer: RouterOutputs["customer"]["all"][number];
 }) {
   const context = api.useContext();
-  const deleteProduct = api.product.delete.useMutation();
+  const deleteCustomer = api.customer.delete.useMutation();
 
   return (
-    <div className="card-compact card bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
-        <Link className="card-title" href={`products/${props.product.id}`}>
-          <h2>{props.product.name}</h2>
+        <Link className="card-title" href={`customers/${props.customer.id}`}>
+          <h2>{props.customer.name}</h2>
         </Link>
 
         <p className="">
-          Created At: {new Date(props.product.createdAt).toISOString()}
+          Created At: {new Date(props.customer.createdAt).toISOString()}
         </p>
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`products/${props.product.id}/edit`}
+            href={`customers/${props.customer.id}/edit`}
           >
             Edit
           </Link>
           <button
             className="btn btn-primary btn-sm text-xs"
             onClick={async () => {
-              await deleteProduct.mutateAsync(props.product.id);
-              await context.product.all.invalidate();
+              await deleteCustomer.mutateAsync(props.customer.id);
+              await context.customer.all.invalidate();
             }}
           >
             Delete
