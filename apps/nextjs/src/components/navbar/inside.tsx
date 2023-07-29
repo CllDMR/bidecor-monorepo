@@ -4,13 +4,14 @@ import Link from "next/link";
 import { auth } from "@acme/auth";
 
 import { SignOutButton } from "../auth";
+import Switch from "./switch/switch";
 
 export const NavbarInside: FC = async () => {
   const session = await auth();
 
   return (
     <header>
-      <nav className="navbar h-20 w-full bg-base-300 px-5 py-3">
+      <nav className="sidebar navbar mt-1 h-8 w-full rounded-lg py-3 shadow-xl">
         <div className="flex-none lg:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
             <svg
@@ -33,12 +34,9 @@ export const NavbarInside: FC = async () => {
           <Link href="/">Logo</Link>
         </div>
 
-        {session && (
-          <div className="flex items-center justify-end gap-4">
-            <span>{session.user.name ?? session.user.email ?? ""}</span>
-            <SignOutButton />
-          </div>
-        )}
+        <div>
+          {session && <SignOutButton />} <Switch />{" "}
+        </div>
       </nav>
     </header>
   );
