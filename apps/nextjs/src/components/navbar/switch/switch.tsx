@@ -19,7 +19,7 @@ export default function Switch() {
     <input
       onChange={() => setTheme(!theme)}
       type="checkbox"
-      className="toggle"
+      className="toggle bg-primary"
       checked={!theme}
     />
   );

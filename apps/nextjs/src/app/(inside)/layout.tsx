@@ -31,7 +31,7 @@ const Layout: FC<PropsWithChildren & { modal: ReactNode }> = ({
         <TRPCReactProvider>
           <div className="drawer lg:drawer-open">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content box-border flex min-h-[100vh] flex-col p-6">
+            <div className="drawer-content box-border flex min-h-[100vh] flex-col p-3 sm:p-4 lg:p-6">
               <NavbarInside />
               <main>
                 {children}
