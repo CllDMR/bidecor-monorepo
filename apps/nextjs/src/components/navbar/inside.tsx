@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import Link from "next/link";
 
-import Switch from "./switch/switch";
+import SwitchTheme from "./switch-theme/switch-theme";
 
 export const NavbarInside: FC = () => {
   return (
@@ -21,7 +21,7 @@ export const NavbarInside: FC = () => {
           </label>
         </div>
         <div>
-          <Switch />{" "}
+          <SwitchTheme />{" "}
         </div>
       </nav>
     </header>
