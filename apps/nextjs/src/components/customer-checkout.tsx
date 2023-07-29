@@ -45,9 +45,9 @@ export const EditCustomerCheckoutForm: FC<{
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
     updateCustomerCheckout({
+      ...data,
       id,
       customerId,
-      ...data,
     });
   };
 

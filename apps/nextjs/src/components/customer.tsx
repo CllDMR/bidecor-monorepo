@@ -40,8 +40,8 @@ export const EditCustomerForm: FC<{ id: string }> = ({ id }) => {
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
     updateCustomer({
-      id,
       ...data,
+      id,
     });
   };
 
