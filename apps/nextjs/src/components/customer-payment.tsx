@@ -178,7 +178,7 @@ function CustomerPaymentCard(props: {
       <div className="card-body">
         <Link
           className="card-title"
-          href={`customerPayments/${props.customerPayment.id}`}
+          href={`customer-payments/${props.customerPayment.id}`}
         >
           <h2>{props.customerPayment.id}</h2>
         </Link>
@@ -189,7 +189,7 @@ function CustomerPaymentCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`customerPayments/${props.customerPayment.id}/edit`}
+            href={`customer-payments/${props.customerPayment.id}/edit`}
           >
             Edit
           </Link>

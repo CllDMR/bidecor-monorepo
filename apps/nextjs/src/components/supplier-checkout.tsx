@@ -197,7 +197,7 @@ function SupplierCheckoutCard(props: {
       <div className="card-body">
         <Link
           className="card-title"
-          href={`supplierCheckouts/${props.supplierCheckout.id}`}
+          href={`supplier-checkouts/${props.supplierCheckout.id}`}
         >
           <h2>{props.supplierCheckout.id}</h2>
         </Link>
@@ -208,7 +208,7 @@ function SupplierCheckoutCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`supplierCheckouts/${props.supplierCheckout.id}/edit`}
+            href={`supplier-checkouts/${props.supplierCheckout.id}/edit`}
           >
             Edit
           </Link>

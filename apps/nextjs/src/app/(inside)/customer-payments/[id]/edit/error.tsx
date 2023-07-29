@@ -9,7 +9,7 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
 
   return (
     <div>
-      <h2>Something went wrong! 33333</h2>
+      <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
   );

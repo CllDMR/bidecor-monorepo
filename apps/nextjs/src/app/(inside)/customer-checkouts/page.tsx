@@ -1,21 +1,19 @@
 import Link from "next/link";
 
+import { CustomerCheckoutList } from "~/components/customer-checkout";
+
 const Page = () => {
   return (
     <div>
-      <h1>Suppliers Page</h1>
+      <div className="flex items-center px-4 py-6">
+        <h1 className="flex-1">CustomerCheckouts Page</h1>
+        <Link className="btn btn-secondary" href="/customer-checkouts/create">
+          Create new CustomerCheckout
+        </Link>
+      </div>
+
       <div>
-        <ul>
-          <li>
-            <Link href="/suppliers/1">To Supplier 1</Link>
-          </li>
-          <li>
-            <Link href="/suppliers/1/edit">To Supplier 1 Edit</Link>
-          </li>
-          <li>
-            <Link href="/suppliers/create">To Supplier Create</Link>
-          </li>
-        </ul>
+        <CustomerCheckoutList />
       </div>
     </div>
   );

@@ -56,9 +56,7 @@ export const EditSupplierForm: FC<{
   );
 };
 
-export const CreateSupplierForm: FC<{
-  supplierId: string;
-}> = ({ supplierId }) => {
+export const CreateSupplierForm: FC = () => {
   const context = api.useContext();
   const { handleSubmit, reset } = useForm<IFormValues>();
 
@@ -72,7 +70,7 @@ export const CreateSupplierForm: FC<{
   );
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    createSupplier({ ...data, supplierId });
+    createSupplier({ ...data });
   };
 
   return (
