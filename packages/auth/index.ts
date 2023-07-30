@@ -1,10 +1,9 @@
 import EmailProvider from "@auth/core/providers/email";
 import type { DefaultSession, Theme } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@bidecor/db";
 import NextAuth from "next-auth";
 import { createTransport, getTestMessageUrl } from "nodemailer";
-
-import { prisma } from "@acme/db";
 
 import { env } from "./env.mjs";
 

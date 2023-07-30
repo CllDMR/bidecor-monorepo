@@ -1,6 +1,5 @@
+import { appRouter, createTRPCContext } from "@bidecor/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-
-import { appRouter, createTRPCContext } from "@acme/api";
 
 export const runtime = "nodejs";
 

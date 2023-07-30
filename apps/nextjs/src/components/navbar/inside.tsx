@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import Link from "next/link";
-
-import { auth } from "@acme/auth";
+import { auth } from "@bidecor/auth";
 
 import { SignOutButton } from "../auth";
 
