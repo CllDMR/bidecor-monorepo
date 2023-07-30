@@ -1,35 +1,29 @@
 import type { FC } from "react";
-import Link from "next/link";
 
-export const DrawerInside: FC = () => (
-  <aside className="drawer-side">
-    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-    <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-    <ul className="menu h-full w-80 gap-y-3 bg-base-200 p-4">
-      <li>
-        <Link href="/dashboard">Dashboard</Link>
-      </li>
-      <li>
-        <Link href="/customer-checkouts">CustomerCheckouts</Link>
-      </li>
-      <li>
-        <Link href="/customer-payments">CustomerPayments</Link>
-      </li>
-      <li>
-        <Link href="/customers">Customers</Link>
-      </li>
-      <li>
-        <Link href="/products">Products</Link>
-      </li>
-      <li>
-        <Link href="/supplier-checkouts">SupplierCheckouts</Link>
-      </li>
-      <li>
-        <Link href="/supplier-payments">SupplierPayments</Link>
-      </li>
-      <li>
-        <Link href="/suppliers">Suppliers</Link>
-      </li>
-    </ul>
-  </aside>
-);
+import { auth } from "@bidecor/auth";
+
+import { SignOutButton } from "../auth";
+import AsideLinks from "./asidelinks/asidelinks";
+
+export const DrawerInside: FC = async () => {
+  const session = await auth();
+
+  return (
+    <aside className="drawer-side lg:my-auto lg:ml-10 lg:h-[95vh] lg:min-w-[250px] lg:rounded-2xl  lg:shadow-xl">
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+
+      <ul className="sidebar menu h-full w-[250px] gap-y-3 p-4 lg:w-full ">
+        <h1 className="flex justify-center px-4 pb-6 text-lg text-primary ">
+          Dashboard Title
+        </h1>
+        <AsideLinks />
+        {session && (
+          <div className="mb-4 mt-auto">
+            <SignOutButton />
+          </div>
+        )}
+      </ul>
+    </aside>
+  );
+};

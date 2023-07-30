@@ -12,7 +12,7 @@ export function SignInWithEmailButton() {
 export function SignOutButton() {
   return (
     <form action="/api/auth/signout" method="post">
-      <button className="btn btn-primary w-full">Sign out</button>
+      <button className="btn btn-primary btn-outline w-full ">Sign out</button>
       <CSRF_experimental />
     </form>
   );

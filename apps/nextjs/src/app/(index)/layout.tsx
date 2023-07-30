@@ -22,13 +22,15 @@ export const metadata: Metadata = {
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
-      <body className={["font-sans", fontSans.variable].join(" ")}>
+      <body
+        className={`${["font-sans", fontSans.variable].join(" ")} base-100`}
+      >
         <TRPCReactProvider>
-          <div className="drawer">
+          <div className="drawer ">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
               <NavbarRoot />
-              <main className="bg-slate-700">{children}</main>
+              <main>{children}</main>
             </div>
             <DrawerRoot />
           </div>

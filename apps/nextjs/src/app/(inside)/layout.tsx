@@ -25,13 +25,15 @@ const Layout: FC<PropsWithChildren & { modal: ReactNode }> = ({
 }) => {
   return (
     <html lang="en">
-      <body className={["font-sans", fontSans.variable].join(" ")}>
+      <body
+        className={`${["font-sans", fontSans.variable].join(" ")} base-100`}
+      >
         <TRPCReactProvider>
           <div className="drawer lg:drawer-open">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col">
+            <div className="drawer-content box-border flex min-h-[100vh] flex-col p-3 sm:p-4 lg:p-6">
               <NavbarInside />
-              <main className="bg-slate-700">
+              <main>
                 {children}
                 {modal}
               </main>
