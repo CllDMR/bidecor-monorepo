@@ -87,15 +87,6 @@ importers:
         specifier: 1.9.1
         version: 1.9.1
     devDependencies:
-      '@acme/api':
-        specifier: ^0.1.0
-        version: link:../../packages/api
-      '@acme/eslint-config':
-        specifier: ^0.2.0
-        version: link:../../packages/config/eslint
-      '@acme/tailwind-config':
-        specifier: ^0.1.0
-        version: link:../../packages/config/tailwind
       '@babel/core':
         specifier: ^7.21.8
         version: 7.21.8
@@ -105,6 +96,15 @@ importers:
       '@babel/runtime':
         specifier: ^7.21.5
         version: 7.21.5
+      '@bidecor/api':
+        specifier: ^0.1.0
+        version: link:../../packages/api
+      '@bidecor/eslint-config':
+        specifier: ^0.2.0
+        version: link:../../packages/config/eslint
+      '@bidecor/tailwind-config':
+        specifier: ^0.1.0
+        version: link:../../packages/config/tailwind
       '@expo/config-plugins':
         specifier: ^6.0.2
         version: 6.0.2
@@ -135,13 +135,13 @@ importers:
 
   apps/nextjs:
     dependencies:
-      '@acme/api':
+      '@bidecor/api':
         specifier: ^0.1.0
         version: link:../../packages/api
-      '@acme/auth':
+      '@bidecor/auth':
         specifier: ^0.1.0
         version: link:../../packages/auth
-      '@acme/db':
+      '@bidecor/db':
         specifier: ^0.1.0
         version: link:../../packages/db
       '@t3-oss/env-nextjs':
@@ -187,10 +187,10 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@bidecor/eslint-config':
         specifier: ^0.2.0
         version: link:../../packages/config/eslint
-      '@acme/tailwind-config':
+      '@bidecor/tailwind-config':
         specifier: ^0.1.0
         version: link:../../packages/config/tailwind
       '@types/node':
@@ -223,10 +223,10 @@ importers:
 
   packages/api:
     dependencies:
-      '@acme/auth':
+      '@bidecor/auth':
         specifier: ^0.1.0
         version: link:../auth
-      '@acme/db':
+      '@bidecor/db':
         specifier: ^0.1.0
         version: link:../db
       '@trpc/client':
@@ -242,7 +242,7 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@bidecor/eslint-config':
         specifier: ^0.2.0
         version: link:../config/eslint
       eslint:
@@ -254,15 +254,15 @@ importers:
 
   packages/auth:
     dependencies:
-      '@acme/db':
-        specifier: ^0.1.0
-        version: link:../db
       '@auth/core':
         specifier: ^0.9.0
         version: 0.9.0(nodemailer@6.9.4)
       '@auth/prisma-adapter':
         specifier: ^1.0.1
         version: 1.0.1(@prisma/client@5.0.0)(nodemailer@6.9.4)
+      '@bidecor/db':
+        specifier: ^0.1.0
+        version: link:../db
       '@t3-oss/env-nextjs':
         specifier: ^0.6.0
         version: 0.6.0(typescript@5.1.6)(zod@3.21.4)
@@ -285,7 +285,7 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@acme/eslint-config':
+      '@bidecor/eslint-config':
         specifier: ^0.2.0
         version: link:../config/eslint
       '@types/nodemailer':

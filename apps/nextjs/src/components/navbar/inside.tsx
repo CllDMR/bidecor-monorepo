@@ -2,8 +2,13 @@ import type { FC } from "react";
 import Link from "next/link";
 
 import Switch from "./switch/switch";
+import { auth } from "@bidecor/auth";
 
-export const NavbarInside: FC = () => {
+import { SignOutButton } from "../auth";
+
+export const NavbarInside: FC = async () => {
+  const session = await auth();
+
   return (
     <header>
       <nav className="sidebar navbar mt-1 h-8 w-full rounded-lg py-3 shadow-xl">

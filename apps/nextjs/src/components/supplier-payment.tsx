@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -49,8 +50,7 @@ export const EditSupplierPaymentForm: FC<{
     });
   };
 
-  if (!supplierPayment)
-    return <div className="">SupplierPayment not found with {id} !</div>;
+  if (!supplierPayment) notFound();
 
   return (
     <form
@@ -155,11 +155,11 @@ function SupplierPaymentCard(props: {
   const deleteSupplierPayment = api.supplierPayment.delete.useMutation();
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card-compact card bg-base-100 shadow-xl">
       <div className="card-body">
         <Link
           className="card-title"
-          href={`supplierPayments/${props.supplierPayment.id}`}
+          href={`supplier-payments/${props.supplierPayment.id}`}
         >
           <h2>{props.supplierPayment.id}</h2>
         </Link>
@@ -170,7 +170,7 @@ function SupplierPaymentCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`supplierPayments/${props.supplierPayment.id}/edit`}
+            href={`supplier-payments/${props.supplierPayment.id}/edit`}
           >
             Edit
           </Link>

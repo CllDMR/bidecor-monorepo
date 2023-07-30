@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div>Loading Supplier Edit...</div>;
+  return <div>Loading CustomerPayment Edit...</div>;
 };
 
 export default Page;

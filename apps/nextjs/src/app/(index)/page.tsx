@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import Link from "next/link";
-
-import { CSRF_experimental } from "@acme/auth";
+import { CSRF_experimental } from "@bidecor/auth";
 
 const HomePage: FC = () => {
   return (

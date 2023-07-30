@@ -1,5 +1,5 @@
 {
-  "name": "@acme/expo",
+  "name": "@bidecor/expo",
   "version": "0.1.0",
   "private": true,
   "main": "index.tsx",
@@ -34,12 +34,12 @@
     "superjson": "1.9.1"
   },
   "devDependencies": {
-    "@acme/api": "^0.1.0",
-    "@acme/eslint-config": "^0.2.0",
-    "@acme/tailwind-config": "^0.1.0",
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",
     "@babel/runtime": "^7.21.5",
+    "@bidecor/api": "^0.1.0",
+    "@bidecor/eslint-config": "^0.2.0",
+    "@bidecor/tailwind-config": "^0.1.0",
     "@expo/config-plugins": "^6.0.2",
     "@types/babel__core": "^7.20.0",
     "@types/react": "^18.2.15",
@@ -53,8 +53,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@acme/eslint-config/base",
-      "@acme/eslint-config/react"
+      "@bidecor/eslint-config/base",
+      "@bidecor/eslint-config/react"
     ]
   }
 }
