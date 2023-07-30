@@ -56,7 +56,7 @@ jobs:
         run: pnpm turbo db:generate
 
       - name: Build, lint, type-check
-        run: pnpm turbo build lint type-check --filter=\!*db*
+        run: pnpm turbo build lint type-check
 
       - name: Check workspaces
         run: pnpm manypkg check
