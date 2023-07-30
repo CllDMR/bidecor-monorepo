@@ -5,18 +5,20 @@ import { notFound } from "next/navigation";
 
 import { api } from "~/utils/api";
 
-const Page: NextPage<{ params: { id: string } }> = ({ params: { id } }) => {
-  const [customerPayment] = api.customerPayment.byId.useSuspenseQuery(id);
+const Page: NextPage<{ params: { id: string; customerId: string } }> = ({
+  params: { id },
+}) => {
+  const [customerCheckout] = api.customerCheckout.byId.useSuspenseQuery(id);
 
-  if (!customerPayment) notFound();
+  if (!customerCheckout) notFound();
 
   return (
     <div>
-      <h1>CustomerPayment Page</h1>
+      <h1>CustomerCheckout Page</h1>
       <div>
         <div className="card w-96 bg-base-100 shadow-xl">
           <div className="card-body">
-            <h2 className="card-title">{customerPayment.id}</h2>
+            <h2 className="card-title">{customerCheckout.id}</h2>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Praesentium, officia temporibus exercitationem ullam hic

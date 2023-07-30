@@ -3,9 +3,14 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const supplierPaymentRouter = createTRPCRouter({
-  all: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.supplierPayment.findMany({ orderBy: { id: "desc" } });
-  }),
+  all: publicProcedure
+    .input(z.object({ supplierId: z.string().nonempty().optional() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.supplierPayment.findMany({
+        where: { supplierId: input.supplierId },
+        orderBy: { id: "desc" },
+      });
+    }),
   byId: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.prisma.supplierPayment.findFirst({ where: { id: input } });
   }),
