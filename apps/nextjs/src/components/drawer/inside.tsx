@@ -1,5 +1,4 @@
 import type { FC } from "react";
-
 import { auth } from "@acme/auth";
 
 import { SignOutButton } from "../auth";
@@ -14,7 +13,7 @@ export const DrawerInside: FC = async () => {
       <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
 
       <ul className="sidebar menu h-full w-[250px] gap-y-3 p-4 lg:w-full ">
-        <h1 className="flex justify-center px-4 py-6 pt-0 text-lg text-primary ">
+        <h1 className="flex justify-center px-4 pb-6 text-lg text-primary ">
           Dashboard Title
         </h1>
         <AsideLinks />

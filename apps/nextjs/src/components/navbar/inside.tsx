@@ -20,9 +20,7 @@ export const NavbarInside: FC = () => {
             <span className="h-[2px] w-[26px] bg-primary "></span>
           </label>
         </div>
-        <div>
-          <Switch />{" "}
-        </div>
+        <Switch />
       </nav>
     </header>
   );
