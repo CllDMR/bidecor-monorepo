@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import { auth } from "@acme/auth";
+
+import { auth } from "@bidecor/auth";
 
 import { SignOutButton } from "../auth";
 import AsideLinks from "./asidelinks/asidelinks";
