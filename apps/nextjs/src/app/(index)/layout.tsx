@@ -7,7 +7,7 @@ import type { FC, PropsWithChildren } from "react";
 
 import { DrawerRoot } from "~/components/drawer/root";
 import { NavbarRoot } from "~/components/navbar/root";
-import { TRPCReactProvider } from "~/components/providers";
+import { Provider } from "~/components/providers";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
       <body
         className={`${["font-sans", fontSans.variable].join(" ")} base-100`}
       >
-        <TRPCReactProvider>
+        <Provider>
           <div className="drawer ">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
@@ -34,7 +34,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
             </div>
             <DrawerRoot />
           </div>
-        </TRPCReactProvider>
+        </Provider>
       </body>
     </html>
   );

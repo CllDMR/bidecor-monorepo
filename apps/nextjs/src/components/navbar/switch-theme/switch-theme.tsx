@@ -7,8 +7,8 @@ export default function SwitchTheme() {
   const { theme, setTheme } = useTheme();
 
   const changeThemeHandler = () => {
-    if (theme === "light") return setTheme("dark");
-    return setTheme("light");
+    if (theme === "light") setTheme("dark");
+    else setTheme("light");
   };
 
   return (
