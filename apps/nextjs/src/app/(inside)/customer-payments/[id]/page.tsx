@@ -1,14 +1,14 @@
 "use client";
 
 import type { NextPage } from "next";
+import { notFound } from "next/navigation";
 
 import { api } from "~/utils/api";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params: { id } }) => {
   const [customerPayment] = api.customerPayment.byId.useSuspenseQuery(id);
 
-  if (!customerPayment)
-    return <div className="">CustomerPayment not found with {id} !</div>;
+  if (!customerPayment) notFound();
 
   return (
     <div>

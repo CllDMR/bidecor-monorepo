@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import type { FC } from "react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -51,8 +52,7 @@ export const EditCustomerCheckoutForm: FC<{
     });
   };
 
-  if (!customerCheckout)
-    return <div className="">CustomerCheckout not found with {id} !</div>;
+  if (!customerCheckout) notFound();
 
   return (
     <form

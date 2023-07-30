@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -50,8 +51,7 @@ export const EditCustomerPaymentForm: FC<{
     });
   };
 
-  if (!customerPayment)
-    return <div className="">CustomerPayment not found with {id} !</div>;
+  if (!customerPayment) notFound();
 
   return (
     <form
