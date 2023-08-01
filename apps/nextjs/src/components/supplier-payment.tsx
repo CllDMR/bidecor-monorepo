@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -49,8 +50,7 @@ export const EditSupplierPaymentForm: FC<{
     });
   };
 
-  if (!supplierPayment)
-    return <div className="">SupplierPayment not found with {id} !</div>;
+  if (!supplierPayment) notFound();
 
   return (
     <form
@@ -130,8 +130,12 @@ export const CreateSupplierPaymentForm: FC<{
   );
 };
 
-export function SupplierPaymentList() {
-  const [supplierPayments] = api.supplierPayment.all.useSuspenseQuery();
+export const SupplierPaymentList: FC<{ supplierId?: string }> = ({
+  supplierId,
+}) => {
+  const [supplierPayments] = api.supplierPayment.all.useSuspenseQuery({
+    supplierId,
+  });
 
   return (
     <>
@@ -146,7 +150,7 @@ export function SupplierPaymentList() {
       )}
     </>
   );
-}
+};
 
 function SupplierPaymentCard(props: {
   supplierPayment: RouterOutputs["supplierPayment"]["all"][number];
@@ -159,7 +163,7 @@ function SupplierPaymentCard(props: {
       <div className="card-body">
         <Link
           className="card-title"
-          href={`supplierPayments/${props.supplierPayment.id}`}
+          href={`suppliers/${props.supplierPayment.supplierId}/payments/${props.supplierPayment.id}`}
         >
           <h2>{props.supplierPayment.id}</h2>
         </Link>
@@ -170,7 +174,7 @@ function SupplierPaymentCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`supplierPayments/${props.supplierPayment.id}/edit`}
+            href={`suppliers/${props.supplierPayment.supplierId}/payments/${props.supplierPayment.id}/edit`}
           >
             Edit
           </Link>

@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -45,7 +46,7 @@ export const EditProductForm: FC<{ id: string }> = ({ id }) => {
     });
   };
 
-  if (!product) return <div className="">Product not found with {id} !</div>;
+  if (!product) notFound();
 
   return (
     <form

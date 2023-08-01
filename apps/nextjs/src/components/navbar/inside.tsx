@@ -21,7 +21,7 @@ export const NavbarInside: FC = () => {
           </label>
         </div>
         <div>
-          <SwitchTheme />{" "}
+          <SwitchTheme />
         </div>
       </nav>
     </header>

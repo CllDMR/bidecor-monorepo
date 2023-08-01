@@ -1,4 +1,4 @@
-import { CSRF_experimental } from "@acme/auth";
+import { CSRF_experimental } from "@bidecor/auth";
 
 export function SignInWithEmailButton() {
   return (

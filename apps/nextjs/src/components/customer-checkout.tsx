@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -51,8 +52,7 @@ export const EditCustomerCheckoutForm: FC<{
     });
   };
 
-  if (!customerCheckout)
-    return <div className="">CustomerCheckout not found with {id} !</div>;
+  if (!customerCheckout) notFound();
 
   return (
     <form
@@ -168,8 +168,12 @@ export const CreateCustomerCheckoutForm: FC<{
   );
 };
 
-export function CustomerCheckoutList() {
-  const [customerCheckouts] = api.customerCheckout.all.useSuspenseQuery();
+export const CustomerCheckoutList: FC<{ customerId?: string }> = ({
+  customerId,
+}) => {
+  const [customerCheckouts] = api.customerCheckout.all.useSuspenseQuery({
+    customerId,
+  });
 
   return (
     <>
@@ -184,7 +188,7 @@ export function CustomerCheckoutList() {
       )}
     </>
   );
-}
+};
 
 function CustomerCheckoutCard(props: {
   customerCheckout: RouterOutputs["customerCheckout"]["all"][number];
@@ -193,11 +197,11 @@ function CustomerCheckoutCard(props: {
   const deleteCustomerCheckout = api.customerCheckout.delete.useMutation();
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card-compact card bg-base-100 shadow-xl">
       <div className="card-body">
         <Link
           className="card-title"
-          href={`customerCheckouts/${props.customerCheckout.id}`}
+          href={`customers/${props.customerCheckout.customerId}/checkouts/${props.customerCheckout.id}`}
         >
           <h2>{props.customerCheckout.id}</h2>
         </Link>
@@ -208,7 +212,7 @@ function CustomerCheckoutCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`customerCheckouts/${props.customerCheckout.id}/edit`}
+            href={`customers/${props.customerCheckout.customerId}/checkouts/${props.customerCheckout.id}/edit`}
           >
             Edit
           </Link>

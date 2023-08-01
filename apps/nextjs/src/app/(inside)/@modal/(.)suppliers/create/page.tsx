@@ -1,5 +1,14 @@
-const Modal = () => {
-  return <div>Modal</div>;
+import type { NextPage } from "next";
+
+import { Modal } from "~/components/modal";
+import { CreateSupplierForm } from "~/components/supplier";
+
+const ModalPage: NextPage = () => {
+  return (
+    <Modal>
+      <CreateSupplierForm />
+    </Modal>
+  );
 };
 
-export default Modal;
+export default ModalPage;

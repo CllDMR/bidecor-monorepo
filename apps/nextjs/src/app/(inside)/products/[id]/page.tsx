@@ -15,9 +15,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params: { id } }) => {
       <div>
         <div className="card w-96 bg-base-100 shadow-xl">
           <div className="card-body">
-            <h2 className="card-title">
-              {product.name} - {product.id}
-            </h2>
+            <h2 className="card-title">{product.id}</h2>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Praesentium, officia temporibus exercitationem ullam hic

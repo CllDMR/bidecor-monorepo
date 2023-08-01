@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -38,7 +39,7 @@ export const EditSupplierForm: FC<{
     });
   };
 
-  if (!supplier) return <div className="">Supplier not found with {id} !</div>;
+  if (!supplier) notFound();
 
   return (
     <form
@@ -56,9 +57,7 @@ export const EditSupplierForm: FC<{
   );
 };
 
-export const CreateSupplierForm: FC<{
-  supplierId: string;
-}> = ({ supplierId }) => {
+export const CreateSupplierForm: FC = () => {
   const context = api.useContext();
   const { handleSubmit, reset } = useForm<IFormValues>();
 
@@ -72,7 +71,7 @@ export const CreateSupplierForm: FC<{
   );
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    createSupplier({ ...data, supplierId });
+    createSupplier({ ...data });
   };
 
   return (
@@ -116,7 +115,7 @@ function SupplierCard(props: {
   const deleteSupplier = api.supplier.delete.useMutation();
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card-compact card bg-base-100 shadow-xl">
       <div className="card-body">
         <Link className="card-title" href={`suppliers/${props.supplier.id}`}>
           <h2>{props.supplier.id}</h2>

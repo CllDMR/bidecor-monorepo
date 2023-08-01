@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -51,8 +52,7 @@ export const EditSupplierCheckoutForm: FC<{
     });
   };
 
-  if (!supplierCheckout)
-    return <div className="">SupplierCheckout not found with {id} !</div>;
+  if (!supplierCheckout) notFound();
 
   return (
     <form
@@ -168,8 +168,12 @@ export const CreateSupplierCheckoutForm: FC<{
   );
 };
 
-export function SupplierCheckoutList() {
-  const [supplierCheckouts] = api.supplierCheckout.all.useSuspenseQuery();
+export const SupplierCheckoutList: FC<{ supplierId?: string }> = ({
+  supplierId,
+}) => {
+  const [supplierCheckouts] = api.supplierCheckout.all.useSuspenseQuery({
+    supplierId,
+  });
 
   return (
     <>
@@ -184,7 +188,7 @@ export function SupplierCheckoutList() {
       )}
     </>
   );
-}
+};
 
 function SupplierCheckoutCard(props: {
   supplierCheckout: RouterOutputs["supplierCheckout"]["all"][number];
@@ -197,7 +201,7 @@ function SupplierCheckoutCard(props: {
       <div className="card-body">
         <Link
           className="card-title"
-          href={`supplierCheckouts/${props.supplierCheckout.id}`}
+          href={`suppliers/${props.supplierCheckout.supplierId}/checkouts/${props.supplierCheckout.id}`}
         >
           <h2>{props.supplierCheckout.id}</h2>
         </Link>
@@ -208,7 +212,7 @@ function SupplierCheckoutCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`supplierCheckouts/${props.supplierCheckout.id}/edit`}
+            href={`suppliers/${props.supplierCheckout.supplierId}/checkouts/${props.supplierCheckout.id}/edit`}
           >
             Edit
           </Link>
