@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 
 import type { FC, PropsWithChildren } from "react";
 
-import { DrawerRoot } from "~/components/drawer/root";
-import { NavbarRoot } from "~/components/navbar/root";
+import { Provider } from "~/components/providers";
+
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Create T3 Turbo",
@@ -14,14 +19,13 @@ export const metadata: Metadata = {
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="drawer ">
-      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
-        <NavbarRoot />
-        <main>{children}</main>
-      </div>
-      <DrawerRoot />
-    </div>
+    <html lang="en">
+      <body
+        className={`${["font-sans", fontSans.variable].join(" ")} base-100`}
+      >
+        <Provider>{children}</Provider>
+      </body>
+    </html>
   );
 };
 
