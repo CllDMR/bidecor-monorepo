@@ -8,6 +8,8 @@ import { httpBatchLink, loggerLink } from "@trpc/client";
 import { ThemeProvider } from "next-themes";
 import superjson from "superjson";
 
+import "react-toastify/dist/ReactToastify.css";
+
 import { api } from "~/utils/api";
 
 const getBaseUrl = () => {
