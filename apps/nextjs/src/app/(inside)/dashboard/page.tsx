@@ -1,5 +1,11 @@
+import ToastTest from "~/components/testToast";
+
 const Page = () => {
-  return <div>Dashboard Page</div>;
+  return (
+    <div>
+      <ToastTest />
+    </div>
+  );
 };
 
 export default Page;
