@@ -149,8 +149,12 @@ export const CreateCustomerPaymentForm: FC<{
   );
 };
 
-export function CustomerPaymentList() {
-  const [customerPayments] = api.customerPayment.all.useSuspenseQuery();
+export const CustomerPaymentList: FC<{ customerId?: string }> = ({
+  customerId,
+}) => {
+  const [customerPayments] = api.customerPayment.all.useSuspenseQuery({
+    customerId,
+  });
 
   return (
     <>
@@ -165,7 +169,7 @@ export function CustomerPaymentList() {
       )}
     </>
   );
-}
+};
 
 function CustomerPaymentCard(props: {
   customerPayment: RouterOutputs["customerPayment"]["all"][number];
@@ -178,7 +182,7 @@ function CustomerPaymentCard(props: {
       <div className="card-body">
         <Link
           className="card-title"
-          href={`customer-payments/${props.customerPayment.id}`}
+          href={`customers/${props.customerPayment.customerId}/payments/${props.customerPayment.id}`}
         >
           <h2>{props.customerPayment.id}</h2>
         </Link>
@@ -189,7 +193,7 @@ function CustomerPaymentCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`customer-payments/${props.customerPayment.id}/edit`}
+            href={`customers/${props.customerPayment.customerId}/payments/${props.customerPayment.id}/edit`}
           >
             Edit
           </Link>

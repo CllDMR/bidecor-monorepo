@@ -130,8 +130,12 @@ export const CreateSupplierPaymentForm: FC<{
   );
 };
 
-export function SupplierPaymentList() {
-  const [supplierPayments] = api.supplierPayment.all.useSuspenseQuery();
+export const SupplierPaymentList: FC<{ supplierId?: string }> = ({
+  supplierId,
+}) => {
+  const [supplierPayments] = api.supplierPayment.all.useSuspenseQuery({
+    supplierId,
+  });
 
   return (
     <>
@@ -146,7 +150,7 @@ export function SupplierPaymentList() {
       )}
     </>
   );
-}
+};
 
 function SupplierPaymentCard(props: {
   supplierPayment: RouterOutputs["supplierPayment"]["all"][number];
@@ -155,11 +159,11 @@ function SupplierPaymentCard(props: {
   const deleteSupplierPayment = api.supplierPayment.delete.useMutation();
 
   return (
-    <div className="card-compact card bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl">
       <div className="card-body">
         <Link
           className="card-title"
-          href={`supplier-payments/${props.supplierPayment.id}`}
+          href={`suppliers/${props.supplierPayment.supplierId}/payments/${props.supplierPayment.id}`}
         >
           <h2>{props.supplierPayment.id}</h2>
         </Link>
@@ -170,7 +174,7 @@ function SupplierPaymentCard(props: {
         <div className="card-actions justify-end pt-4">
           <Link
             className="btn btn-primary btn-sm text-xs"
-            href={`supplier-payments/${props.supplierPayment.id}/edit`}
+            href={`suppliers/${props.supplierPayment.supplierId}/payments/${props.supplierPayment.id}/edit`}
           >
             Edit
           </Link>
